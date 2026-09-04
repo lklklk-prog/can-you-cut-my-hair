@@ -1,5 +1,5 @@
 /* ==========================================================================
-   "can u cut my hair??" - Birthday Party Confetti & Yippee Script
+   "can u cut my hair??" - Local Yippee Confetti Burst Script
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnYes = document.getElementById('btnYes');
     const btnNo = document.getElementById('btnNo');
     const btnReplay = document.getElementById('btnReplay');
-    const confettiCanvas = document.getElementById('confettiCanvas');
-    const confettiCtx = confettiCanvas.getContext('2d');
+    const localConfettiCanvas = document.getElementById('localConfettiCanvas');
+    const confettiCtx = localConfettiCanvas.getContext('2d');
 
     let dodgeCount = 0;
 
@@ -38,11 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
     btnNo.addEventListener('mousemove', dodgeNoButton);
     btnNo.addEventListener('click', dodgeNoButton);
 
-    // YES Button Handler (Triggers Birthday Confetti Ribbon Burst!)
+    // YES Button Handler (Triggers Local Birthday Confetti Burst right on the image!)
     btnYes.addEventListener('click', () => {
         questionStage.classList.add('hidden');
         successStage.classList.remove('hidden');
-        startBirthdayConfetti();
+        startLocalBirthdayConfetti();
     });
 
     // Reset Handler
@@ -54,10 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
         questionStage.classList.remove('hidden');
     });
 
-    // BIRTHDAY PARTY RECTANGULAR CONFETTI SYSTEM
-    function startBirthdayConfetti() {
-        confettiCanvas.width = window.innerWidth;
-        confettiCanvas.height = window.innerHeight;
+    // LOCAL BIRTHDAY CONFETTI EXPLOSION AROUND YIPPEE CREATURE
+    function startLocalBirthdayConfetti() {
+        const width = 220;
+        const height = 220;
+        localConfettiCanvas.width = width;
+        localConfettiCanvas.height = height;
 
         const particles = [];
         const colors = [
@@ -65,48 +67,52 @@ document.addEventListener('DOMContentLoaded', () => {
             '#27ae60', '#ff5252', '#ffeb3b', '#e91e63', '#ffffff'
         ];
 
-        for (let i = 0; i < 110; i++) {
+        // 35 festive confetti ribbons bursting from the center of the creature
+        for (let i = 0; i < 35; i++) {
             particles.push({
-                x: Math.random() * confettiCanvas.width,
-                y: Math.random() * confettiCanvas.height - confettiCanvas.height,
-                w: Math.random() * 8 + 6,   // Rectangular width
-                h: Math.random() * 14 + 8,  // Rectangular height
+                x: width / 2,
+                y: height / 2,
+                w: Math.random() * 5 + 4,   // ribbon width
+                h: Math.random() * 9 + 5,   // ribbon height
                 color: colors[Math.floor(Math.random() * colors.length)],
-                vy: Math.random() * 3 + 2,
-                vx: (Math.random() - 0.5) * 3,
+                vx: (Math.random() - 0.5) * 6,
+                vy: (Math.random() - 0.7) * 6,
                 angle: Math.random() * Math.PI * 2,
-                vRot: (Math.random() - 0.5) * 0.15,
-                opacity: 1
+                vRot: (Math.random() - 0.5) * 0.2,
+                opacity: 1,
+                decay: Math.random() * 0.012 + 0.005
             });
         }
 
-        function drawConfetti() {
-            confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-            
+        function drawLocalConfetti() {
+            confettiCtx.clearRect(0, 0, width, height);
+            let activeParticles = 0;
+
             particles.forEach((p) => {
-                p.y += p.vy;
                 p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.1; // gentle gravity
                 p.angle += p.vRot;
+                p.opacity -= p.decay;
 
-                if (p.y > confettiCanvas.height) {
-                    p.y = -20;
-                    p.x = Math.random() * confettiCanvas.width;
+                if (p.opacity > 0) {
+                    activeParticles++;
+                    confettiCtx.save();
+                    confettiCtx.translate(p.x, p.y);
+                    confettiCtx.rotate(p.angle);
+                    confettiCtx.fillStyle = p.color;
+                    confettiCtx.globalAlpha = Math.max(0, p.opacity);
+                    confettiCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                    confettiCtx.restore();
                 }
-
-                confettiCtx.save();
-                confettiCtx.translate(p.x, p.y);
-                confettiCtx.rotate(p.angle);
-                confettiCtx.fillStyle = p.color;
-                confettiCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
-                confettiCtx.restore();
             });
 
-            if (!successStage.classList.contains('hidden')) {
-                requestAnimationFrame(drawConfetti);
-            } else {
-                confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            if (!successStage.classList.contains('hidden') && activeParticles > 0) {
+                requestAnimationFrame(drawLocalConfetti);
+            } else if (successStage.classList.contains('hidden')) {
+                confettiCtx.clearRect(0, 0, width, height);
             }
         }
-        drawConfetti();
+        drawLocalConfetti();
     }
 });

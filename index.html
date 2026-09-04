@@ -31,17 +31,17 @@
 
         <!-- SUCCESS STAGE -->
         <div id="successStage" class="stage-box hidden">
-            <p class="yippee-subtext">yippee!!</p>
+            <p class="yippee-subtext">YIPPEEEEEEEEEEEEEEEEEE</p>
             
-            <!-- YIPPEE CREATURE IMAGE -->
-            <img src="yippee.png" alt="yippee creature" class="yippee-img">
+            <!-- YIPPEE CREATURE IMAGE WRAPPER -->
+            <div class="yippee-wrapper" id="yippeeWrapper">
+                <img src="yippee.png" alt="yippee creature" class="yippee-img" id="yippeeImg">
+                <canvas id="localConfettiCanvas"></canvas>
+            </div>
 
             <button id="btnReplay" class="btn btn-reset">reset</button>
         </div>
     </div>
-
-    <!-- Birthday Party Confetti Canvas -->
-    <canvas id="confettiCanvas"></canvas>
 
     <script src="app.js"></script>
 </body>
