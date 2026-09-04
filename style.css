@@ -42,7 +42,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 16px;
 }
 
 /* Small basic blood red monospace typography */
@@ -102,7 +102,7 @@ body {
     margin-top: 10px;
 }
 
-/* YIPPEE Stage Typography & Image (No Glow, No Motion) */
+/* YIPPEE Stage Typography & Day Question Text */
 .yippee-subtext {
     font-family: var(--font-mono);
     font-size: 16px;
@@ -126,7 +126,16 @@ body {
     object-fit: contain;
     position: relative;
     z-index: 2;
-    /* No animation, no drop-shadow glow */
+}
+
+.day-question-text {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--blood-red);
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 8px var(--blood-red-glow);
+    margin-top: 8px;
 }
 
 canvas#localConfettiCanvas {
