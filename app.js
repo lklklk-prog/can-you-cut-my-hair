@@ -1,5 +1,5 @@
 /* ==========================================================================
-   "can u cut my hair??" - Super Fast Dodge & Yippee Sparks Script
+   "can u cut my hair??" - Birthday Party Confetti & Yippee Script
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
             questionHeading.textContent = "can u cut my hair?? heh";
         }
 
-        // Extremely wide dodge range across screen
         const maxOffsetX = Math.min(window.innerWidth * 0.42, 320);
         const maxOffsetY = Math.min(window.innerHeight * 0.4, 220);
 
@@ -39,11 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
     btnNo.addEventListener('mousemove', dodgeNoButton);
     btnNo.addEventListener('click', dodgeNoButton);
 
-    // YES Button Handler (Triggers Colorful Sparks Explosion!)
+    // YES Button Handler (Triggers Birthday Confetti Ribbon Burst!)
     btnYes.addEventListener('click', () => {
         questionStage.classList.add('hidden');
         successStage.classList.remove('hidden');
-        startColorSparks();
+        startBirthdayConfetti();
     });
 
     // Reset Handler
@@ -55,51 +54,59 @@ document.addEventListener('DOMContentLoaded', () => {
         questionStage.classList.remove('hidden');
     });
 
-    // COLORFUL SPARKS PARTICLES SYSTEM
-    function startColorSparks() {
+    // BIRTHDAY PARTY RECTANGULAR CONFETTI SYSTEM
+    function startBirthdayConfetti() {
         confettiCanvas.width = window.innerWidth;
         confettiCanvas.height = window.innerHeight;
 
         const particles = [];
-        const colors = ['#ff2d55', '#00f2fe', '#f2c94c', '#9b51e0', '#27ae60', '#ff003c', '#ffffff'];
+        const colors = [
+            '#ff2d55', '#00f2fe', '#f2c94c', '#9b51e0', 
+            '#27ae60', '#ff5252', '#ffeb3b', '#e91e63', '#ffffff'
+        ];
 
-        for (let i = 0; i < 95; i++) {
+        for (let i = 0; i < 110; i++) {
             particles.push({
-                x: confettiCanvas.width / 2 + (Math.random() - 0.5) * 40,
-                y: confettiCanvas.height / 2 + (Math.random() - 0.5) * 40,
+                x: Math.random() * confettiCanvas.width,
+                y: Math.random() * confettiCanvas.height - confettiCanvas.height,
+                w: Math.random() * 8 + 6,   // Rectangular width
+                h: Math.random() * 14 + 8,  // Rectangular height
                 color: colors[Math.floor(Math.random() * colors.length)],
-                size: Math.random() * 6 + 3,
-                vy: (Math.random() - 0.6) * 7,
-                vx: (Math.random() - 0.5) * 8,
-                alpha: 1,
-                decay: Math.random() * 0.015 + 0.008
+                vy: Math.random() * 3 + 2,
+                vx: (Math.random() - 0.5) * 3,
+                angle: Math.random() * Math.PI * 2,
+                vRot: (Math.random() - 0.5) * 0.15,
+                opacity: 1
             });
         }
 
-        function drawSparks() {
+        function drawConfetti() {
             confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
             
-            particles.forEach((p, idx) => {
-                p.x += p.vx;
+            particles.forEach((p) => {
                 p.y += p.vy;
-                p.vy += 0.12; // gravity
-                p.alpha -= p.decay;
+                p.x += p.vx;
+                p.angle += p.vRot;
 
-                if (p.alpha > 0) {
-                    confettiCtx.fillStyle = p.color;
-                    confettiCtx.globalAlpha = Math.max(0, p.alpha);
-                    confettiCtx.beginPath();
-                    confettiCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                    confettiCtx.fill();
+                if (p.y > confettiCanvas.height) {
+                    p.y = -20;
+                    p.x = Math.random() * confettiCanvas.width;
                 }
+
+                confettiCtx.save();
+                confettiCtx.translate(p.x, p.y);
+                confettiCtx.rotate(p.angle);
+                confettiCtx.fillStyle = p.color;
+                confettiCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                confettiCtx.restore();
             });
 
             if (!successStage.classList.contains('hidden')) {
-                requestAnimationFrame(drawSparks);
+                requestAnimationFrame(drawConfetti);
             } else {
                 confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
             }
         }
-        drawSparks();
+        drawConfetti();
     }
 });

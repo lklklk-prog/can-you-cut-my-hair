@@ -102,27 +102,21 @@ body {
     margin-top: 10px;
 }
 
-/* Success stage typography & Yippee Image */
-.success-text {
-    font-size: 14px;
-    color: var(--blood-red);
-    text-shadow: 0 0 8px var(--blood-red-glow);
-}
-
+/* Success stage yippee text with exact heart font style */
 .yippee-subtext {
-    font-size: 15px;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 400;
     color: var(--blood-red);
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-top: 2px;
-    text-shadow: 0 0 12px var(--blood-red-glow);
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 8px var(--blood-red-glow);
 }
 
 .yippee-img {
     width: 130px;
     height: auto;
     border-radius: 8px;
-    margin-top: 6px;
+    margin-top: 4px;
     filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.3));
     animation: yippeeBounce 0.5s ease-in-out infinite alternate;
 }
@@ -136,7 +130,7 @@ body {
     display: none !important;
 }
 
-/* Colorful Sparks Canvas */
+/* Birthday Party Confetti Canvas */
 canvas#confettiCanvas {
     position: fixed;
     inset: 0;
