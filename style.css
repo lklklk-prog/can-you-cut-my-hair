@@ -1,0 +1,123 @@
+/* ==========================================================================
+   "can u cut my hair??" - Minimal Blood Red Monospace Theme
+   ========================================================================== */
+
+:root {
+    --bg-black: #050505;
+    --blood-red: #bb0000;
+    --blood-red-glow: rgba(187, 0, 0, 0.4);
+    --text-dark-red: #770000;
+    --font-mono: 'Fira Code', monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+body {
+    background-color: var(--bg-black);
+    color: var(--blood-red);
+    font-family: var(--font-mono);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.main-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 480px;
+}
+
+.stage-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+/* Small basic blood red monospace typography */
+.question-text {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--blood-red);
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 8px var(--blood-red-glow);
+    transition: all 0.2s ease;
+}
+
+.horizontal-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    width: 100%;
+}
+
+.btn {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 22px;
+    border-radius: 4px;
+    cursor: pointer;
+    background: transparent;
+    transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.2s ease;
+}
+
+.btn-yes {
+    color: var(--blood-red);
+    border: 1px solid var(--blood-red);
+    box-shadow: 0 0 10px var(--blood-red-glow);
+}
+
+.btn-yes:hover {
+    background: rgba(187, 0, 0, 0.15);
+}
+
+.btn-no {
+    color: var(--text-dark-red);
+    border: 1px solid var(--text-dark-red);
+    position: relative;
+    transition: transform 0.15s ease-out;
+}
+
+.btn-reset {
+    color: var(--blood-red);
+    border: 1px solid var(--text-dark-red);
+    font-size: 12px;
+    padding: 6px 14px;
+    margin-top: 12px;
+}
+
+/* Success stage typography */
+.success-text {
+    font-size: 14px;
+    color: var(--blood-red);
+    text-shadow: 0 0 8px var(--blood-red-glow);
+}
+
+.yippee-subtext {
+    font-size: 14px;
+    color: var(--blood-red);
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-top: 4px;
+    text-shadow: 0 0 10px var(--blood-red-glow);
+}
+
+.hidden {
+    display: none !important;
+}
