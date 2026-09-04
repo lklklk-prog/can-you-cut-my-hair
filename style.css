@@ -42,7 +42,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
+    gap: 20px;
 }
 
 /* Small basic blood red monospace typography */
@@ -74,7 +74,7 @@ body {
     border-radius: 4px;
     cursor: pointer;
     background: transparent;
-    transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.2s ease;
+    transition: transform 0.1s cubic-bezier(0.1, 0.9, 0.2, 1), background-color 0.2s ease;
 }
 
 .btn-yes {
@@ -91,7 +91,7 @@ body {
     color: var(--text-dark-red);
     border: 1px solid var(--text-dark-red);
     position: relative;
-    transition: transform 0.15s ease-out;
+    transition: transform 0.12s ease-out;
 }
 
 .btn-reset {
@@ -99,10 +99,10 @@ body {
     border: 1px solid var(--text-dark-red);
     font-size: 12px;
     padding: 6px 14px;
-    margin-top: 12px;
+    margin-top: 10px;
 }
 
-/* Success stage typography */
+/* Success stage typography & Yippee Image */
 .success-text {
     font-size: 14px;
     color: var(--blood-red);
@@ -110,14 +110,36 @@ body {
 }
 
 .yippee-subtext {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--blood-red);
     font-weight: 700;
     letter-spacing: 1px;
-    margin-top: 4px;
-    text-shadow: 0 0 10px var(--blood-red-glow);
+    margin-top: 2px;
+    text-shadow: 0 0 12px var(--blood-red-glow);
+}
+
+.yippee-img {
+    width: 130px;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 6px;
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.3));
+    animation: yippeeBounce 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes yippeeBounce {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(-8px) scale(1.05); }
 }
 
 .hidden {
     display: none !important;
+}
+
+/* Colorful Sparks Canvas */
+canvas#confettiCanvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 99;
 }
