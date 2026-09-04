@@ -102,7 +102,7 @@ body {
     margin-top: 10px;
 }
 
-/* YIPPEE Stage Typography & Local Image Wrapper */
+/* YIPPEE Stage Typography & Image (No Glow, No Motion) */
 .yippee-subtext {
     font-family: var(--font-mono);
     font-size: 16px;
@@ -124,11 +124,9 @@ body {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 8px;
     position: relative;
     z-index: 2;
-    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.25));
-    animation: yippeeBounce 0.4s ease-in-out infinite alternate;
+    /* No animation, no drop-shadow glow */
 }
 
 canvas#localConfettiCanvas {
@@ -139,11 +137,6 @@ canvas#localConfettiCanvas {
     height: 220px;
     pointer-events: none;
     z-index: 3;
-}
-
-@keyframes yippeeBounce {
-    0% { transform: translateY(0) scale(1); }
-    100% { transform: translateY(-8px) scale(1.05); }
 }
 
 .hidden {

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   "can u cut my hair??" - Local Yippee Confetti Burst Script
+   "can u cut my hair??" - Slow Motion Yippee Confetti Script
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -38,11 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
     btnNo.addEventListener('mousemove', dodgeNoButton);
     btnNo.addEventListener('click', dodgeNoButton);
 
-    // YES Button Handler (Triggers Local Birthday Confetti Burst right on the image!)
+    // YES Button Handler (Triggers Slow Motion Local Confetti Burst!)
     btnYes.addEventListener('click', () => {
         questionStage.classList.add('hidden');
         successStage.classList.remove('hidden');
-        startLocalBirthdayConfetti();
+        startSlowLocalConfetti();
     });
 
     // Reset Handler
@@ -54,8 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
         questionStage.classList.remove('hidden');
     });
 
-    // LOCAL BIRTHDAY CONFETTI EXPLOSION AROUND YIPPEE CREATURE
-    function startLocalBirthdayConfetti() {
+    // SLOW MOTION BIRTHDAY CONFETTI AROUND CREATURE
+    function startSlowLocalConfetti() {
         const width = 220;
         const height = 220;
         localConfettiCanvas.width = width;
@@ -67,31 +67,31 @@ document.addEventListener('DOMContentLoaded', () => {
             '#27ae60', '#ff5252', '#ffeb3b', '#e91e63', '#ffffff'
         ];
 
-        // 35 festive confetti ribbons bursting from the center of the creature
-        for (let i = 0; i < 35; i++) {
+        // Gentle, slow-motion confetti ribbons
+        for (let i = 0; i < 30; i++) {
             particles.push({
                 x: width / 2,
-                y: height / 2,
-                w: Math.random() * 5 + 4,   // ribbon width
-                h: Math.random() * 9 + 5,   // ribbon height
+                y: height / 2 - 10,
+                w: Math.random() * 5 + 4,
+                h: Math.random() * 8 + 5,
                 color: colors[Math.floor(Math.random() * colors.length)],
-                vx: (Math.random() - 0.5) * 6,
-                vy: (Math.random() - 0.7) * 6,
+                vx: (Math.random() - 0.5) * 2.8,   // Slower horizontal velocity
+                vy: (Math.random() - 0.65) * 3.2,  // Slower vertical pop
                 angle: Math.random() * Math.PI * 2,
-                vRot: (Math.random() - 0.5) * 0.2,
+                vRot: (Math.random() - 0.5) * 0.08, // Slow rotation
                 opacity: 1,
-                decay: Math.random() * 0.012 + 0.005
+                decay: Math.random() * 0.006 + 0.004 // Slow fade out like video
             });
         }
 
-        function drawLocalConfetti() {
+        function drawSlowConfetti() {
             confettiCtx.clearRect(0, 0, width, height);
             let activeParticles = 0;
 
             particles.forEach((p) => {
                 p.x += p.vx;
                 p.y += p.vy;
-                p.vy += 0.1; // gentle gravity
+                p.vy += 0.045; // Slow floaty gravity
                 p.angle += p.vRot;
                 p.opacity -= p.decay;
 
@@ -108,11 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (!successStage.classList.contains('hidden') && activeParticles > 0) {
-                requestAnimationFrame(drawLocalConfetti);
+                requestAnimationFrame(drawSlowConfetti);
             } else if (successStage.classList.contains('hidden')) {
                 confettiCtx.clearRect(0, 0, width, height);
             }
         }
-        drawLocalConfetti();
+        drawSlowConfetti();
     }
 });
